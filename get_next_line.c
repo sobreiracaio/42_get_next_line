@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crocha-s <crocha-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 21:22:35 by admin             #+#    #+#             */
-/*   Updated: 2023/05/17 18:16:47 by crocha-s         ###   ########.fr       */
+/*   Updated: 2023/05/17 21:35:31 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,14 @@
 
 char *get_next_line (int fd)
 {
+	char *line;
+	static char *backup;
+
+	backup = read_file(fd, backup);
+	if(fd < 0 || BUFFER_SIZE < 1 || !backup)
+		return (NULL);
 	
+			
 }
 
 static char *read_file(int fd, char *backup)
