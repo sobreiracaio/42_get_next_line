@@ -6,7 +6,7 @@
 /*   By: crocha-s <crocha-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 21:22:35 by admin             #+#    #+#             */
-/*   Updated: 2023/05/18 19:05:31 by crocha-s         ###   ########.fr       */
+/*   Updated: 2023/05/18 19:47:18 by crocha-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char *get_next_line (int fd)
 		return (NULL);
 	line = get_line(backup);
 	backup = remove_read_line(backup);
-	
 	return (line);
 	
 	
@@ -43,7 +42,10 @@ static char *read_file(int fd, char *backup)
 	
     buffer = (char *)malloc(BUFFER_SIZE + 1);
     if(!buffer)
+	{
+		
         return (NULL);
+	}
     read_bytes = 1;
 	while (read_bytes > 0 &&  !ft_strchr(backup, '\n') )
 	{
@@ -74,7 +76,10 @@ static char *get_line(char *backup)
 		size++;
 	line = (char *)malloc(sizeof(char) * (size + 2));
 	if(!line)
+	{
+		
 		return (NULL);
+	}
 	ft_strlcpy(line, backup, size +1);
 	if (backup[size] == '\n')
 		line[size++] = '\n';
@@ -98,7 +103,10 @@ static char *remove_read_line(char *backup)
 	}
 	new_backup = (char *)malloc(sizeof(char) * (ft_strlen(backup) -1 + 1));
 	if (!new_backup)
+	{
+		
 		return (NULL);
+	}
 	i++;
 	j = 0;
 	while(backup[i])
