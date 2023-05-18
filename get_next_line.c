@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crocha-s <crocha-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 21:22:35 by admin             #+#    #+#             */
-/*   Updated: 2023/05/18 19:47:18 by crocha-s         ###   ########.fr       */
+/*   Updated: 2023/05/19 00:02:47 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char *get_next_line (int fd)
 	static char *backup;
 
 	
-	if(fd < 0 || BUFFER_SIZE < 1 || !backup)
+	if(fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	backup = read_file(fd, backup);
 	if(!backup)
@@ -37,31 +37,27 @@ char *get_next_line (int fd)
 
 static char *read_file(int fd, char *backup)
 {
-    char *buffer;
+    char *temp;
 	int		read_bytes;
 	
-    buffer = (char *)malloc(BUFFER_SIZE + 1);
-    if(!buffer)
+    temp = (char *)malloc(BUFFER_SIZE + 1);
+    if(!temp)
+		return (NULL);
+	read_bytes = 1;
+	while (read_bytes && !ft_strchr(backup, '\n') )
 	{
-		
-        return (NULL);
-	}
-    read_bytes = 1;
-	while (read_bytes > 0 &&  !ft_strchr(backup, '\n') )
-	{
-		read_bytes =  read(fd, buffer, BUFFER_SIZE);
-		if (read_bytes < 0 )
-			break;
-		buffer[read_bytes] = '\0';
-		backup = ft_strjoin(backup, buffer);
+		read_bytes =  read(fd, temp, BUFFER_SIZE);
+		if (read_bytes == -1 )
+			{
+				free(temp);
+				free(backup);
+				return (NULL);
+			}
+		temp[read_bytes] = '\0';
+		backup = ft_strjoin(backup, temp);
 	}    
-	
-	free(buffer);
-	if(read_bytes < 0)   
-    	return (NULL);
-	else
-		return (backup);
-		
+	free(temp);
+	return (backup);
 }
 
 static char *get_line(char *backup)
@@ -80,9 +76,10 @@ static char *get_line(char *backup)
 		
 		return (NULL);
 	}
+	
 	ft_strlcpy(line, backup, size +1);
-	if (backup[size] == '\n')
-		line[size++] = '\n';
+	//if (backup[size] == '\n')
+	//	line[size++] = '\n';
 	line[size] = '\0';
 	return (line);
 }
@@ -98,15 +95,11 @@ static char *remove_read_line(char *backup)
 		i++;
 	if(!backup[i])
 	{
-		
 		return (NULL);
 	}
-	new_backup = (char *)malloc(sizeof(char) * (ft_strlen(backup) -1 + 1));
+	new_backup = (char *)malloc(sizeof(char) * (ft_strclen(backup, '\0') -1 + 1));
 	if (!new_backup)
-	{
-		
 		return (NULL);
-	}
 	i++;
 	j = 0;
 	while(backup[i])
