@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: crocha-s <crocha-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:43:46 by crocha-s          #+#    #+#             */
-/*   Updated: 2023/05/19 00:07:21 by admin            ###   ########.fr       */
+/*   Updated: 2023/05/19 18:21:19 by crocha-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 char	*ft_strchr(const char *s, int c)
 {
 	unsigned char	x;
+	if(!s)
+		return (0);
 
 	x = (unsigned char) c;
 	while (*s && *s != x)
@@ -25,29 +27,30 @@ char	*ft_strchr(const char *s, int c)
 		return (NULL);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		j;
-	char	*sum;
+	unsigned int len;
+	char	*result;
 
-	i = -1;
-	j = 0;
-	sum = (char *)malloc ((ft_strlen(s1) + ft_strlen(s2)) + 1);
-	if (!sum || (!s1 && !s2))
+	len = ft_strclen(s1, '\0') + ft_strclen(s2, '\0');
+	result = (char *)malloc(sizeof(char) * len + 1);
+	if (!result)
 		return (NULL);
-	if (s1)
-	{
-		while (s1[++i] != '\0')
-			sum[i] = s1[i];
-	}
-	if (s2)
-	{
-		while (s2[j])
-			sum[i++] = s2[j++];
-	}
-	sum[i] = '\0';
-	return (sum);
+	i = -1;
+	
+	while (s1[++i] != '\0')
+		result[i] = s1[i];
+	
+	j = 0;
+	
+	while (s2[j])
+		result[i++] = s2[j++];
+	
+	result[i] = '\0';
+	free(s1);
+	return (result);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
