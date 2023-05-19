@@ -6,7 +6,7 @@
 /*   By: crocha-s <crocha-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 21:22:35 by admin             #+#    #+#             */
-/*   Updated: 2023/05/19 18:07:34 by crocha-s         ###   ########.fr       */
+/*   Updated: 2023/05/19 18:50:12 by crocha-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ static char *get_line(char *buff)
 	}
 	
 	ft_strlcpy(line, buff, size +1);
-	//if (buff[size] == '\n')
-	//	line[size++] = '\n';
+	if (buff[size] == '\n')
+		line[size++] = '\n';
 	line[size] = '\0';
 	return (line);
 }

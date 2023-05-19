@@ -6,7 +6,7 @@
 /*   By: crocha-s <crocha-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:43:46 by crocha-s          #+#    #+#             */
-/*   Updated: 2023/05/19 18:21:19 by crocha-s         ###   ########.fr       */
+/*   Updated: 2023/05/19 18:48:04 by crocha-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,19 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		j;
 	unsigned int len;
 	char	*result;
-
+	
 	len = ft_strclen(s1, '\0') + ft_strclen(s2, '\0');
 	result = (char *)malloc(sizeof(char) * len + 1);
 	if (!result)
 		return (NULL);
-	i = -1;
+	i = 0;
 	
-	while (s1[++i] != '\0')
+	
+	while (s1 && s1[i])
+	{
 		result[i] = s1[i];
-	
+		i++;
+	}
 	j = 0;
 	
 	while (s2[j])
