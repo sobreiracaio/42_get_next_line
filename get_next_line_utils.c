@@ -6,7 +6,7 @@
 /*   By: crocha-s <crocha-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:43:46 by crocha-s          #+#    #+#             */
-/*   Updated: 2023/05/19 18:48:04 by crocha-s         ###   ########.fr       */
+/*   Updated: 2023/05/20 13:24:46 by crocha-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 char	*ft_strchr(const char *s, int c)
 {
 	unsigned char	x;
-	if(!s)
-		return (0);
 
+	if (!s)
+		return (0);
 	x = (unsigned char) c;
 	while (*s && *s != x)
 		s++;
@@ -29,28 +29,24 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int		i;
-	int		j;
-	unsigned int len;
-	char	*result;
-	
+	int			i;
+	int			j;
+	size_t		len;
+	char		*result;
+
 	len = ft_strclen(s1, '\0') + ft_strclen(s2, '\0');
 	result = (char *)malloc(sizeof(char) * len + 1);
 	if (!result)
 		return (NULL);
 	i = 0;
-	
-	
 	while (s1 && s1[i])
 	{
 		result[i] = s1[i];
 		i++;
 	}
 	j = 0;
-	
 	while (s2[j])
 		result[i++] = s2[j++];
-	
 	result[i] = '\0';
 	free(s1);
 	return (result);
@@ -77,7 +73,7 @@ size_t	ft_strclen(const char *s, char c)
 {
 	size_t	i;
 
-	if(!s)
+	if (!s)
 		return (0);
 	i = 0;
 	while (s[i] && s[i] != c)
@@ -98,5 +94,3 @@ size_t	ft_strlen(const char *s)
 	}
 	return (i);
 }
-
-
