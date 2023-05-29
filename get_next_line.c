@@ -6,7 +6,7 @@
 /*   By: crocha-s <crocha-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 21:22:35 by admin             #+#    #+#             */
-/*   Updated: 2023/05/20 13:19:05 by crocha-s         ###   ########.fr       */
+/*   Updated: 2023/05/29 16:27:37 by crocha-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,3 +95,19 @@ static char	*remove_read_line(char *buff)
 	buff[i] = '\0';
 	return (buff);
 }
+
+// int main()
+// {
+// 	int fd;
+// 	fd =open("teste.txt",O_RDONLY );
+// 	char * line;
+// 	line = get_next_line(fd);
+// 	while (line)
+// 	{
+// 		printf("%s", line);
+// 		free(line);
+// 		line = get_next_line(fd);
+// 	}
+// 	printf("\n");
+// 	close(fd);
+// }
